@@ -1,4 +1,4 @@
-function Connect-CloudIQ {
+function Connect-CloudiQ {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -35,13 +35,4 @@ function Connect-CloudIQ {
     
     New-Variable -Name tokenType -Value $OAuthReq.tokentype -Scope Global -Force
     New-Variable -Name AccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
-}
-function Get-CloudIQSubscription {
-    [CmdletBinding()]
-    param (
-        [Parameter()]
-        [string]
-        $Organization
-    )
-    Invoke-RestMethod -Method Get -Uri "https://api.crayon.com/api/v1/subscriptions/?organizationID=$Organization" -Authentication $TokenType -Token (ConvertTo-SecureString -String $AccessToken -AsPlainText) | Select-Object -ExpandProperty Items
 }
