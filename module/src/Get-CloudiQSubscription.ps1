@@ -2,15 +2,18 @@ function Get-CloudiQSubscription {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [string]
+        [int]
         $OrganizationId
     )
     $APICall = Invoke-CloudiQApiRequest -Uri "subscriptions/?organizationID=$OrganizationId" -Method Get
     
     $APICall | ForEach-Object {
         [PSCustomObject]@{
-            Organization = $_.Organization.Name
-            OrganizationId = $_.Organization.Id
-        }
+            Publisher       = $_.Publisher.Name
+            Product         = $_.Product.ItemName
+            ProductId       = $_.Id
+            Organization    = $_.Organization.Name
+            OrganizationId  = $_.Organization.Id
+        } | Format-Table
     }
 }

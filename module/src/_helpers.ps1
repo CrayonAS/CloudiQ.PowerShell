@@ -4,14 +4,18 @@ function Invoke-CloudiQApiRequest {
         [Parameter(Mandatory=$True, Position=0)]
         [string]
         $Uri,
-        [Parameter(Mandatory=$True, Position=1)]
+        [Parameter(Position=1)]
         [string]
-        $Method
+        $Method = "Get",
+        [Parameter(Position=2)]
+        [string]
+        $Body
     )
     try {
         $restSplat = @{
+            Uri    = "https://apiv1.crayon.com/api/v1/$Uri"
             Method = $Method
-            Uri    = "https://api.crayon.com/api/v1/$Uri"
+            Body   = $Body
             Authentication = $TokenType
             Token = ConvertTo-SecureString -String $AccessToken -AsPlainText
         }
