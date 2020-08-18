@@ -16,8 +16,8 @@ function Invoke-CloudiQApiRequest {
             Uri    = "https://apiv1.crayon.com/api/v1/$Uri"
             Method = $Method
             Body   = $Body
-            Authentication = $TokenType
-            Token = ConvertTo-SecureString -String $AccessToken -AsPlainText
+            Authentication = $CloudIqTokenType
+            Token = ConvertTo-SecureString -String $CloudIqAccessToken -AsPlainText
         }
         Invoke-RestMethod @restSplat | Select-Object -ExpandProperty Items -ErrorAction Stop
     }

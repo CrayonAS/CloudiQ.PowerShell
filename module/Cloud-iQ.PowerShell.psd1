@@ -6,7 +6,7 @@
     CompanyName       = 'Crayon'
     Copyright         = 'Cloud-iQ.PowerShell is licensed under the GNU General Public License v3.0'
     Description       = 'Module to automate Crayon Cloud-iQ'
-    FunctionsToExport = @("Connect-CloudiQ", "Get-CloudiQSubscription")
+    FunctionsToExport = @("Connect-CloudiQ", "Get-CloudiQSubscription","Get-CloudiQOrganization")
     CmdletsToExport   = ''
     VariablesToExport = ''
     AliasesToExport   = ''
