@@ -1,4 +1,30 @@
-function Connect-CloudIQ {
+function Connect-CloudiQ {
+    <#
+    .SYNOPSIS
+
+    Connect to CloudiQ and adds API token to your session.
+
+    .DESCRIPTION
+
+    Connect to CloudiQ by using a client id and secret created in the portal, as well as your username and password.
+
+    .PARAMETER ClientId
+
+    Client Id from the portal, created under API Management
+
+    .PARAMETER ClientSecret
+
+    Client Secret from the portal, created under API Management
+
+    .INPUTS
+
+    .OUTPUTS
+
+    No output, adds API token to your current session.
+
+    .EXAMPLE
+    Connect-CloudiQ -ClientId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -ClientSecret xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    #>
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -33,15 +59,6 @@ function Connect-CloudIQ {
     
     $OAuthReq = Invoke-RestMethod -Method Post -Uri $apiBaseUrl/connect/token/ -Body $Body -Headers $headers
     
-    New-Variable -Name tokenType -Value $OAuthReq.tokentype -Scope Global -Force
-    New-Variable -Name AccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
-}
-function Get-CloudIQSubscription {
-    [CmdletBinding()]
-    param (
-        [Parameter()]
-        [string]
-        $Organization
-    )
-    Invoke-RestMethod -Method Get -Uri "https://api.crayon.com/api/v1/subscriptions/?organizationID=$Organization" -Authentication $TokenType -Token (ConvertTo-SecureString -String $AccessToken -AsPlainText) | Select-Object -ExpandProperty Items
+    New-Variable -Name CloudIqTokenType -Value $OAuthReq.tokentype -Scope Global -Force
+    New-Variable -Name CloudIqAccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
 }
