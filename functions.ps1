@@ -31,7 +31,7 @@ function Connect-CloudIQ {
     $headers.Add("Authorization", "Basic "+$EncodedText)
     $headers.Add("Content-Type", "application/x-www-form-urlencoded")
     
-    $OAuthReq = Invoke-RestMethod -Method Post -Uri $apiBaseUrl/connect/token -Body $Body -Headers $headers
+    $OAuthReq = Invoke-RestMethod -Method Post -Uri $apiBaseUrl/connect/token/ -Body $Body -Headers $headers
     
     New-Variable -Name tokenType -Value $OAuthReq.tokentype -Scope Global -Force
     New-Variable -Name AccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
