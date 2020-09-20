@@ -1,3 +1,3 @@
-Get-ChildItem -Path ($PSScriptRoot + "/src") | ForEach-Object {
+Get-ChildItem -Path ($PSScriptRoot + "/functions") -Recurse -File | ForEach-Object {
     . $_
 }

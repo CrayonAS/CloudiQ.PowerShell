@@ -6,16 +6,20 @@
     CompanyName       = 'Crayon'
     Copyright         = 'The Cloud-iQ module is licensed under the GNU General Public License v3.0'
     Description       = 'Module to automate licensing through Crayon Cloud-iQ.'
-    FunctionsToExport = @("Connect-CloudiQ", "Get-CloudiQSubscription","Get-CloudiQOrganization")
+    FunctionsToExport = @(
+        "Connect-CloudiQ"
+        "Get-CloudiQSubscription"
+        "Get-CloudiQOrganization"
+        )
     CmdletsToExport   = ''
     VariablesToExport = ''
     AliasesToExport   = ''
     PrivateData       = @{
         PSData = @{
-            Tags         = @("Crayon", "Cloud-iQ", "licensing")
+            Tags         = @("Crayon", "Cloud-iQ", "CloudiQ", "license")
             ProjectUri   = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell'
             ReleaseNotes = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/releases'
         }
     }
-    HelpInfoURI       = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/wiki'
+    HelpInfoURI       = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/docs'
 }
