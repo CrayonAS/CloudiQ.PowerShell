@@ -3,7 +3,7 @@ BeforeAll {
     Import-Module -Name "$PSScriptRoot/../CloudiQ/CloudiQ.psd1" -Force -ErrorAction Stop
 }
 
-Describe 'Test Get-CloudiQOrganization' {
+Describe 'Test Organizations' {
     BeforeAll {
         . "$PSScriptRoot/mocks/organizations.ps1"
     }
@@ -16,5 +16,6 @@ Describe 'Test Get-CloudiQOrganization' {
     It 'Should show only the two organizations using EUR' {
         $Organizations = Get-CloudiQOrganization -Name "EUR"
         $Organizations.count | Should -be 2
+        $Organizations.Name | Should -Be "Demo Customer [T1/EUR]", "Demo Customer [T2/EUR]"
     }
 }
