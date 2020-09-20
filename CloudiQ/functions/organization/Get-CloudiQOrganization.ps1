@@ -8,9 +8,9 @@ function Get-CloudiQOrganization {
 
     Get all the organizations that are available to you, and presents them as objects. 
 
-    .PARAMETER OrganizationId
+    .PARAMETER Name
 
-    Organization Id, to limit the subscriptions to certain organizations.
+    Name of the organization you want. Supports partial names, no wildcard needed.
 
     .INPUTS
 
@@ -21,9 +21,9 @@ function Get-CloudiQOrganization {
     Outputs a PSCustomObject.
 
     .EXAMPLE
-    Get-CloudiQSubscription
+    Get-CloudiQOrganization
     .EXAMPLE
-    Get-CloudiQSubscription -OrganizationId *******
+    Get-CloudiQOrganization -Name "Organization01"
     #>
     [CmdletBinding()]
     param (
