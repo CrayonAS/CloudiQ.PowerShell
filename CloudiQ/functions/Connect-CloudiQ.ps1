@@ -48,8 +48,8 @@ function Connect-CloudiQ {
     $password = Read-Host -Prompt "Password" -AsSecureString
     
     $Body = @{
-        'username'=$username
-        'password'=$password | ConvertFrom-SecureString -AsPlainText
+        'username'= $username
+        'password'= $password | ConvertFrom-SecureString -AsPlainText
         'grant_type'="password"
         'scope'="CustomerApi"
     }
