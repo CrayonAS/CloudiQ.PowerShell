@@ -8,8 +8,11 @@
     Description       = 'Module to automate licensing through Crayon Cloud-iQ.'
     FunctionsToExport = @(
         "Connect-CloudiQ"
-        "Get-CloudiQSubscription"
+        # Organization
         "Get-CloudiQOrganization"
+        # Subscription
+        "Get-CloudiQSubscription"
+        "Set-CloudiQSubscription"
         )
     CmdletsToExport   = ''
     VariablesToExport = ''
