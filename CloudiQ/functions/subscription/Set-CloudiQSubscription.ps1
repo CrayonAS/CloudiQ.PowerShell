@@ -48,7 +48,7 @@ function Set-CloudiQSubscription {
         [int]
         $Quantity
     )
-    $subscription = Invoke-CloudiQApiRequest -Uri ("subscriptions/$SubscriptionId/") -Method 'GET'
+    $subscription = Invoke-CloudiQApiRequest -Uri ("subscriptions/$SubscriptionId/")
 
     $originalQuantity = $subscription.quantity
     
@@ -65,8 +65,9 @@ function Set-CloudiQSubscription {
     $APICall = Invoke-CloudiQApiRequest -Uri ("subscriptions/$SubscriptionId/") -Method 'PUT' -Body ($subscription | ConvertTo-Json)
 
     [PSCustomObject]@{
-        Name        = $APICall.name
-        Id          = $APICall.Id
-        Quantity    = $APICall.Quantity
+        Name            = $APICall.name
+        Id              = $APICall.Id
+        OldQuantity     = $originalQuantity
+        NewQuantity     = $APICall.Quantity
     }
 }
