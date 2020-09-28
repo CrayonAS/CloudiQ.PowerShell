@@ -50,6 +50,7 @@ function Get-CloudiQSubscription {
         $OrganizationId
     )
 
+    # Depending on how we want to access subscriptions, Invoke-CloudiQApiRequest appropriatly
     if ($OrganizationName) {
         $OrganizationId = Get-CloudiQOrganization -Name $OrganizationName | Select-object -ExpandProperty Id
         $APICall = Invoke-CloudiQApiRequest -Uri "subscriptions/?organizationID=$OrganizationId" | Select-Object -ExpandProperty Items
@@ -68,12 +69,15 @@ function Get-CloudiQSubscription {
             ProductId      = $_.Product.Id
             SubscriptionId = $_.Id
             Quantity       = $_.Quantity
-            #$Price += $_.SalesPrice
             Organization   = $_.Organization.Name
         }
     }
     if ($Name) {
         $result = $result | Where-Object -Property Product -like $Name
+        # Send warning if there are no results
+        if (!$result) {
+            Write-Warning ("No subscriptions found with that name. Are you sure you meant " + $Name + "?")
+        }
     }
     return $result | Sort-Object -Property 'Product'
 }

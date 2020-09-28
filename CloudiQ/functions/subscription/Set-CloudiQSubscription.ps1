@@ -1,41 +1,36 @@
 function Set-CloudiQSubscription {
     <#
     .SYNOPSIS
-
-    Get all subscriptions.
+    Update a subscription based on Subscription ID.
 
     .DESCRIPTION
+    Update the friendly name, quantity, invoice profile, status and tags of a subscription.
 
-    Get all subscriptions, from all organizations that the user has access to. It's possible to define the organization ID or name to narrow down the results.
-
-    .PARAMETER OrganizationId
-
+    .PARAMETER SubscriptionId
     Organization Id, to limit the subscriptions to certain organizations.
 
-    .PARAMETER Name
-    Name of the organization you want to see the current subscriptions for.
+    .PARAMETER Add
+    
 
     .INPUTS
-
-    Can either use the parameters Name or OrganizationId, or pipe any number of OrganizationId to the cmdlet.
+    Requires an 
 
     .OUTPUTS
-
     Outputs a PSCustomObject.
 
     .EXAMPLE
-    Get-CloudiQSubscription
+    Set-CloudiQSubscription -SubscriptionId 00000 -Add 1
 
     .EXAMPLE
-    Get-CloudiQSubscription -Name Company
+    Set-CloudiQSubscription -SubscriptionId 00000 -Subtract 2
 
     .EXAMPLE
-    Get-CloudiQSubscription -OrganizationId *******
+    Set-CloudiQSubscription -SubscriptionId 00000 -Quantity 3
 
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Position = 0, ValueFromPipeline = $true)]
+        [Parameter(Position = 0, ValueFromPipeline = $true, Mandatory = $true)]
         [string]
         $SubscriptionId,
         [Parameter(Position = 1)]
