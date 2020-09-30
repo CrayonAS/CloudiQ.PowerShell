@@ -1,6 +1,6 @@
 @{
     RootModule        = 'CloudiQ.psm1'
-    ModuleVersion     = '0.5.0'
+    ModuleVersion     = '1.0.0'
     GUID              = '84a3337c-3d0b-4483-bd52-d7cf06a3ab8b'
     Author            = 'Crayon'
     CompanyName       = 'Crayon'
@@ -19,9 +19,10 @@
     AliasesToExport   = ''
     PrivateData       = @{
         PSData = @{
-            Tags         = @("Crayon", "Cloud-iQ", "CloudiQ", "license")
-            ProjectUri   = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell'
-            ReleaseNotes = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/releases'
+            Prerelease      = 'alpha1'
+            Tags            = @("Crayon", "Cloud-iQ", "CloudiQ", "license")
+            ProjectUri      = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell'
+            ReleaseNotes    = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/releases'
         }
     }
     HelpInfoURI       = 'https://github.com/CrayonAS/Crayon.Cloud-iQ.PowerShell/docs'
