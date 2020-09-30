@@ -3,7 +3,7 @@ BeforeAll {
     Import-Module -Name "$PSScriptRoot/../CloudiQ/CloudiQ.psd1" -Force -ErrorAction Stop
 }
 
-Describe 'Test Organizations' {
+Describe 'test Organizations' {
     BeforeAll {
         . "$PSScriptRoot/mocks/organizations.ps1"
     }

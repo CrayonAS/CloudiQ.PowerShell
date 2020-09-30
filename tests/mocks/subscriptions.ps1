@@ -1,57 +1,77 @@
-function Invoke-CloudiQApiRequest($uri) {}
+function Invoke-CloudiQApiRequest($uri, $method) {}
 Mock Invoke-CloudiQApiRequest {
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 E3'
-            ProductId    = 67226
-            Quantity     = 11
-            Organization = 'Demo Customer [T1/EUR]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 E3'
+            Product      = @{Id = '67226' }
+            Id           = '12345'
+            Quantity     = '21'
+            Organization = @{Name = 'Demo Customer [T1/EUR]' }
         }
     }
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 E3'
-            ProductId    = 191691
-            Quantity     = 10
-            Organization = 'Demo Customer [T1/EUR]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 E1'
+            Product      = @{Id = '67224' }
+            Id           = '23456'
+            Quantity     = '38'
+            Organization = @{Name = 'Demo Customer [T1/EUR]' }
         }
     }
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 E3'
-            ProductId    = 70717
-            Quantity     = 10
-            Organization = 'Demo Customer [T1/USD]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 F1'
+            Product      = @{Id = '67225' }
+            Id           = '34567'
+            Quantity     = '198'
+            Organization = @{Name = 'Demo Customer [T1/EUR]' }
         }
     }
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 E5'
-            ProductId    = 170607
-            Quantity     = 10
-            Organization = 'Demo Customer [T2/USD]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 E1'
+            Product      = @{Id = '67224' }
+            Id           = '10010'
+            Quantity     = '1948'
+            Organization = @{Name = 'Demo Customer [T1/USD]' }
         }
     }
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 F3'
-            ProductId    = 67244
-            Quantity     = 10
-            Organization = 'Demo Customer [T2/USD]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 F1'
+            Product      = @{Id = '67225' }
+            Id           = '10011'
+            Quantity     = '249'
+            Organization = @{Name = 'Demo Customer [T1/USD]' }
         }
     }
+} -ParameterFilter { $Uri -Eq "subscriptions" }
+# Mock getting subscriptions from a particular customer, based on the parameter OrganizationName
+Mock Invoke-CloudiQApiRequest {
     [PSCustomObject]@{
         Items = @{
-            Publisher    = 'Microsoft'
-            Product      = 'Microsoft 365 Apps for business'
-            ProductId    = 143230
-            Quantity     = 8
-            Organization = 'Demo Customer [T1/EUR]'
+            Publisher    = @{Name = "Microsoft" }
+            Name         = 'Microsoft 365 E3'
+            Product      = @{Id = '67226' }
+            Id           = '12345'
+            Quantity     = '21'
+            Organization = @{Name = 'Demo Customer [T1/EUR]' }
         }
     }
-}
+} -ParameterFilter { $Uri -Eq "subscriptions/?organizationID=4013280"}
+# Mock a specific subscription by using the subscription Id
+Mock Invoke-CloudiQApiRequest {
+    [PSCustomObject]@{
+        Publisher    = @{Name = "Microsoft" }
+        Name         = 'Microsoft 365 E3'
+        Product      = @{Id = '67226' }
+        Id           = '12345'
+        Quantity     = '21'
+        Organization = @{Name = 'Demo Customer [T1/EUR]' }
+    }
+} -ParameterFilter { $Uri -Eq 'subscriptions/12345' }
