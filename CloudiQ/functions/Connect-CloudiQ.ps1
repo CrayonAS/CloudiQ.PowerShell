@@ -34,6 +34,11 @@ function Connect-CloudiQ {
         [string]
         $ClientSecret
     )
+
+    if (Test-Path -Path 'Env:\CloudiQClientId') {
+        Set-Variable -Name ClientId -Value $Env:CloudiQClientId
+        Set-Variable -Name ClientSecret -Value $Env:CloudiQClientSecret
+    }
     
     $apiBaseUrl = 'https://api.crayon.com/api/v1'
     
@@ -44,9 +49,16 @@ function Connect-CloudiQ {
     $Bytes = [System.Text.Encoding]::UTF8.GetBytes($credentials)
     $EncodedText =[Convert]::ToBase64String($Bytes)
     
-    $username = Read-Host -Prompt "Username"
-    $password = Read-Host -Prompt "Password" -AsSecureString
-    
+    # Check if username and password is set as environment variables. If not, ask for username and password.
+    if (Test-Path -Path 'Env:\CloudiQUsername') {
+        Set-Variable -Name Username -Value $Env:CloudiQUsername
+        Set-Variable -Name Password -Value (Convertto-SecureString -String $Env:CloudiQPassword -AsPlainText)
+    }
+    else {
+        $username = Read-Host -Prompt "Username"
+        $password = Read-Host -Prompt "Password" -AsSecureString
+    }
+
     $Body = @{
         'username'= $username
         'password'= $password | ConvertFrom-SecureString -AsPlainText
