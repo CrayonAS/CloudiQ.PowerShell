@@ -57,8 +57,16 @@ function Connect-CloudiQ {
     $headers.Add("Authorization", "Basic "+$EncodedText)
     $headers.Add("Content-Type", "application/x-www-form-urlencoded")
     
-    $OAuthReq = Invoke-RestMethod -Method Post -Uri $apiBaseUrl/connect/token/ -Body $Body -Headers $headers
-    
+    try {
+        $OAuthReq = Invoke-RestMethod -Method Post -Uri $apiBaseUrl/connect/token/ -Body $Body -Headers $headers 
+    }
+    catch {
+        Write-Error $_.Exception.Message
+        break
+    }
+    # Add the authentication token to variables that will be used by the other functions
     New-Variable -Name CloudIqTokenType -Value $OAuthReq.tokentype -Scope Global -Force
     New-Variable -Name CloudIqAccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
+
+    Write-Host "Successfully connected to Cloud-iQ" -ForegroundColor Green
 }
