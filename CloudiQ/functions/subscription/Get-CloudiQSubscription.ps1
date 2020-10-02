@@ -52,7 +52,13 @@ function Get-CloudiQSubscription {
 
     # Depending on how we want to access subscriptions, Invoke-CloudiQApiRequest appropriatly
     if ($OrganizationName) {
-        $OrganizationId = Get-CloudiQOrganization -Name $OrganizationName | Select-object -ExpandProperty Id
+        try {
+            $OrganizationId = Get-CloudiQOrganization -Name $OrganizationName -ErrorAction Stop | Select-object -ExpandProperty Id
+        }
+        catch {
+            Write-Error $_.Exception.Message
+            break
+        }
         $APICall = Invoke-CloudiQApiRequest -Uri "subscriptions/?organizationID=$OrganizationId" | Select-Object -ExpandProperty Items
     }
     elseif ($SubscriptionId) {

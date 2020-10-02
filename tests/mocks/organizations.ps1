@@ -60,10 +60,10 @@ Mock Invoke-CloudiQApiRequest {
 Mock Invoke-CloudiQApiRequest {
     [PSCustomObject]@{
         Items = @{
-            Id    = 4013280
+            Id            = 4013280
             Name          = 'Demo Customer [T1/EUR]'
             ParentId      = 0
             AccountNumber = ''
         }
     }
-} -ParameterFilter { $Uri -Eq "organizations/?search=*T1/EUR*" }
+} -ParameterFilter { $Uri -Eq 'organizations/?search=T1/EUR' }

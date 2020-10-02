@@ -31,5 +31,6 @@ function Get-CloudiQOrganization {
         [string]
         $Name
     )
-    Invoke-CloudiQApiRequest -Uri ("organizations/?search="+$name) | Select-Object -ExpandProperty Items
+    $uri = ("organizations/?search=" + $name)
+    Invoke-CloudiQApiRequest -Uri $uri | Select-Object -ExpandProperty Items
 }

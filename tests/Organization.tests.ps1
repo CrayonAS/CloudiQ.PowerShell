@@ -1,13 +1,10 @@
 BeforeAll {
     # Import module
     Import-Module -Name "$PSScriptRoot/../CloudiQ/CloudiQ.psd1" -Force -ErrorAction Stop
+    . "$PSScriptRoot/mocks/organizations.ps1"
 }
 
 Describe 'test Organizations' {
-    BeforeAll {
-        . "$PSScriptRoot/mocks/organizations.ps1"
-    }
-
     It 'Should result in listing four demo customers' {
         $Organizations = Get-CloudiQOrganization
         $Organizations.count | Should -be 4
