@@ -61,7 +61,7 @@ function Connect-CloudiQ {
 
     # Converting from SecureString, the hard way due to limitations in Windows PowerShell
     $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
-    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($BSTR)
     $Body = @{
         'username'= $username
         'password'= $password
