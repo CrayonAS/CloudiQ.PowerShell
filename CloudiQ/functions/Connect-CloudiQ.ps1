@@ -43,10 +43,10 @@ function Connect-CloudiQ {
     $apiBaseUrl = 'https://api.crayon.com/api/v1'
     
     $headers = @{}
-    $encodedClientId = [System.Web.HttpUtility]::UrlEncode($clientId) 
-    $encodedSecret = [System.Web.HttpUtility]::UrlEncode($clientSecret) 
-    $credentials = "$($encodedClientId):$($encodedSecret)"
-    $Bytes = [System.Text.Encoding]::UTF8.GetBytes($credentials)
+    # $encodedClientId = [System.Web.HttpUtility]::UrlEncode($clientId) 
+    # $encodedSecret = [System.Web.HttpUtility]::UrlEncode($clientSecret) 
+    # $credentials = "$($encodedClientId):$($encodedSecret)"
+    $Bytes = [System.Text.Encoding]::UTF8.GetBytes($ClientId + ":" + $ClientSecret)
     $EncodedText =[Convert]::ToBase64String($Bytes)
     
     # Check if username and password is set as environment variables. If not, ask for username and password.
@@ -59,9 +59,12 @@ function Connect-CloudiQ {
         $password = Read-Host -Prompt "Password" -AsSecureString
     }
 
+    # Converting from SecureString, the hard way due to limitations in Windows PowerShell
+    $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
+    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
     $Body = @{
         'username'= $username
-        'password'= $password | ConvertFrom-SecureString -AsPlainText
+        'password'= $password
         'grant_type'="password"
         'scope'="CustomerApi"
     }
@@ -76,8 +79,7 @@ function Connect-CloudiQ {
         Write-Error $_.Exception.Message
         break
     }
-    # Add the authentication token to variables that will be used by the other functions
-    New-Variable -Name CloudIqTokenType -Value $OAuthReq.tokentype -Scope Global -Force
+    # Add the authentication token to the variable that will be used by the other functions
     New-Variable -Name CloudIqAccessToken -Value $OAuthReq.accesstoken -Scope Global -Force
 
     Write-Host "Successfully connected to Cloud-iQ" -ForegroundColor Green

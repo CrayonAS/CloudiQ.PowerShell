@@ -63,7 +63,7 @@ Mock Invoke-CloudiQApiRequest {
             Organization = @{Name = 'Demo Customer [T1/EUR]' }
         }
     }
-} -ParameterFilter { $Uri -Eq "subscriptions/?organizationID=4013280"}
+} -ParameterFilter { $Uri -Eq 'subscriptions/?organizationID=4013280' }
 # Mock a specific subscription by using the subscription Id
 Mock Invoke-CloudiQApiRequest {
     [PSCustomObject]@{
