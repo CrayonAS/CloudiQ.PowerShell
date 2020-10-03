@@ -1,7 +1,17 @@
 $branch = "rs/issue10"
 
 Set-PSRepository PSGallery -InstallationPolicy Trusted
-Install-Module -Name Pester -Scope CurrentUser -Confirm:$false
+
+if ($PSVersionTable.PSVersion.Major -le 5) {
+    Install-Module -Name Pester -Scope CurrentUser -Confirm:$false -Force
+    Remove-Module Pester
+    Import-Module Pester
+}
+else {
+    Install-Module -Name Pester -Scope CurrentUser -Confirm:$false -Force
+    Import-Module Pester
+}
+
 $file = @{
     Uri = "https://github.com/CrayonAS/CloudiQ.PowerShell/archive/$branch.zip"
     OutFile = 'cloudiq.zip'
