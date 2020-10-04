@@ -15,8 +15,8 @@ jobs:
     - name: Run Pester tests (pwsh)
       run: |
         Set-PSRepository psgallery -InstallationPolicy trusted
-        Install-Module -Name Pester -RequiredVersion 5.0.4 -Force;
-        Invoke-Pester -Path "tests";
+        Install-Module -Name Pester -RequiredVersion 5.0.4 -confirm:$false -Force
+        Invoke-Pester -Path "tests"
       
       shell: pwsh
   
@@ -27,6 +27,6 @@ jobs:
     - name: Run Pester tests (PowerShell)
       run: |
         Set-PSRepository psgallery -InstallationPolicy trusted
-        Install-Module -Name Pester -RequiredVersion 5.0.4 -Force;
-        Invoke-Pester -Path "tests";
-        if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1};
+        Install-Module -Name Pester -RequiredVersion 5.0.4 -Confirm:$false -Force
+        Invoke-Pester -Path "tests"
+        if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1}
