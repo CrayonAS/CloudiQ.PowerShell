@@ -1,4 +1,4 @@
-$branch = "rs/issue10"
+$branch = "master"
 
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 

@@ -9,7 +9,7 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Run Pester tests (pwsh)
       run: |
         Set-PSRepository psgallery -InstallationPolicy trusted
@@ -21,7 +21,7 @@ jobs:
   test-posh:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Run Pester tests (PowerShell)
       run: |
         Set-PSRepository psgallery -InstallationPolicy trusted
